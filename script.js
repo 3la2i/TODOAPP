@@ -15,11 +15,19 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 const form = document.getElementById("myForm");
+
 const taskContainer = document.getElementById("taskContainer");
 
+form.addEventListener("submit", function (event) {
+  const name = event.target.name.value;
+  createTask(name);
+});
+
 // Create a task
+
 function createTask(taskName) {
   db.collection("tasks")
+
     .add({
       name: taskName,
       completed: false,
@@ -45,19 +53,52 @@ function fetchTasks() {
         taskDiv.classList.add("task");
         taskDiv.setAttribute("data-id", doc.id);
         console.log(task.completed);
-        taskDiv.innerHTML = `
-               <input name="completed" type="checkbox" class="completed" ${
-                 task.completed ? "checked" : ""
-               } id=${doc.id} />
-              <span>${task.name}</span>
-              <div>
-                  <button onclick="updateTask('${doc.id}', '${
-          task.name
-        }')">Edit</button>
-                  <button onclick="deleteTask('${doc.id}')">Delete</button>
-              </div>
-            `;
+
+        let isEdit = false;
+
+        const onEdit = () => {
+          console.log("ediooot");
+        };
+
+        const content = `
+        <input name="completed" type="checkbox" class="completed" ${
+          task.completed ? "checked" : ""
+        } id=${doc.id} />
+       <span contenteditable="true">${task.name}</span>
+       <div>
+           <button class="edit" id=${doc.id}>Edit</button>
+           <button onclick="openEdit">Delete</button>
+       </div>
+     `;
+
+        taskDiv.innerHTML = content;
         taskContainer.appendChild(taskDiv);
+
+        const editElements = document.querySelectorAll(".edit");
+
+        editElements.forEach((element) => {
+          element.addEventListener("click", (event) => {
+            const btnId = event.target.id;
+
+            taskDiv.innerHTML = content;
+            if (btnId === doc.id) {
+              const form = document.createElement("form");
+
+              const content = `
+                <input name='editName' />
+                <button type='submit'>submit</button>
+              `;
+
+              form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                console.log(event.target.editName.value, btnId);
+              });
+
+              form.innerHTML = content;
+              taskContainer.appendChild(form);
+            }
+          });
+        });
 
         const checkboxElements = document.querySelectorAll(".completed");
 
@@ -72,7 +113,6 @@ function fetchTasks() {
           });
         });
       });
-      
     })
     .catch((error) => {
       console.error("Error fetching tasks: ", error);
