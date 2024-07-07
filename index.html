@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore-compat.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h2>To-Do List</h2>
+      <form id="myForm">
+        <input
+          placeholder="Add a new task"
+          name="name"
+          id="taskInput"
+          required
+        />
+        <div>
+          <!-- <label for="completed">Completed</label>
+                <input name="completed" type="checkbox" id="completed" /> -->
+        </div>
+        <button type="submit">Add Task</button>
+      </form>
+      <div id="taskContainer"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore-compat.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h2 id="title">Hello Qais</h2>
+    <form id="myForm">
+        <input placeholder="write fruit" name="name" />
+        <button type="submit">Add</button>
+    </form>
+
+    <div id="container"></div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyASf-6QO0uG3P6VoABwCz63iiBMB_ImVk0",
+            authDomain: "todolist-9fe43.firebaseapp.com",
+            projectId: "todolist-9fe43",
+            storageBucket: "todolist-9fe43.appspot.com",
+            messagingSenderId: "463706579138",
+            appId: "1:463706579138:web:3e990d47c300b949c19b5b",
+            measurementId: "G-YC4FQ8T0J4"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+
+        const db = firebase.firestore();
+
+    </script>
+
+    
+    <script src="./script.js"></script>
+
+</body>
+</html> -->
